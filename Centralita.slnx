@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ClassLibrary2/Centralita.csproj" />
+  <Project Path="MainCentralita/MainCentralita.csproj" Id="96490765-1138-4393-959e-fc03f3fd9fc9" />
+</Solution>
