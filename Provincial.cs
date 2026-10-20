@@ -53,12 +53,12 @@ namespace ModelosCentralita
 
             // Propiedad
 
-            public float CostoLlamada
+            public override float CostoLlamada
         {
             get => this.CalcularCosto();
         }
 
-        public new string Mostrar()
+        public override string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -68,6 +68,20 @@ namespace ModelosCentralita
             sb.AppendLine($"Costo de la llamada: {CostoLlamada}");
 
             return sb.ToString();
+        }
+
+
+        // Metodo ToString
+        public override string ToString()
+        {
+            return Mostrar();
+        }
+
+        // Metodo equals
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Provincial;
         }
 
     }

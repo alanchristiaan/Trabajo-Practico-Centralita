@@ -37,8 +37,6 @@ namespace ModelosCentralita
                     case TipoLlamada.Local:
                         if (llamada is Local)
                         {
-                            // Como el operador 'is' nos deja evaluarlo, 
-                            // podemos castearlo o acceder directamente a su costo si está expuesto
                             Local l = (Local)llamada;
                             gananciaTotal += l.CostoLlamada;
                         }
@@ -97,7 +95,7 @@ namespace ModelosCentralita
 
         // Metodo Mostrar
 
-        public string Mostrar()
+        protected string Mostrar()
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
@@ -112,7 +110,7 @@ namespace ModelosCentralita
             foreach (Llamada llamada in this.listaDeLlamadas)
             {
                 // Llamamos al Mostrar() que le corresponda a cada objeto
-                sb.AppendLine(llamada.Mostrar());
+                sb.AppendLine(llamada.ToString());
 
                 // Validamos para poner los guiones donde corresponda según el tipo
                 if (llamada is Local)
@@ -128,6 +126,53 @@ namespace ModelosCentralita
             }
 
             return sb.ToString();
+        }
+
+
+        // Metodo ToString
+        public override string ToString()
+        {
+            return Mostrar();
+        }
+
+        // Metodo Agregar Llamada
+
+        private void AgregarLlamada(Llamada nuevaLlamada)
+        {
+            this.ListaDeLlamadas.Add(nuevaLlamada);
+        }
+
+        public static bool operator ==(Centralita c, Llamada llamada)
+        {
+            bool bandera = false;
+            
+            foreach(Llamada item in c.ListaDeLlamadas)
+            {
+                if (item == llamada)
+                {
+                    bandera = true;
+                    break;
+                }
+            }
+            return bandera;
+        }
+
+        public static bool operator !=(Centralita c, Llamada llamada)
+        {
+            return !(c == llamada);
+        }
+
+
+        // Sobrecarga de operador +
+
+        public static Centralita operator +(Centralita c, Llamada nuevallamada)
+        {
+            if (c != nuevallamada)
+            {
+                c.AgregarLlamada(nuevallamada);
+            }
+
+            return c;
         }
     }
 }

@@ -31,14 +31,14 @@ namespace ModelosCentralita
         }
 
         // Propiedad de metodo
-        public float CostoLlamada
+        public override float CostoLlamada
         {
             get => this.CalcularCosto();
         }
 
         // Metodo Mostrar
 
-        public new string Mostrar()
+        public override string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -47,6 +47,17 @@ namespace ModelosCentralita
             sb.AppendLine($"Costo de la llamada: {CostoLlamada}");
 
             return sb.ToString();
+        }
+        public override string ToString()
+        {
+            return Mostrar();
+        }
+
+        // Metodo equals
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Local;
         }
     }
 }

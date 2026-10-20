@@ -2,7 +2,7 @@
 namespace ModelosCentralita
 
 {
-    public class Llamada
+    public abstract class Llamada
     {
         // Atributos
 
@@ -10,10 +10,12 @@ namespace ModelosCentralita
         protected string nroDestino;
         protected string nroOrigen;
 
+
         // Propiedades de Lectura
         public float Duracion { get => duracion;}
         public string NroDestino { get => nroDestino; }
         public string NroOrigen { get => nroOrigen;}
+        public abstract float CostoLlamada { get; }
 
         // Constructor
         public Llamada(float duracion, string nroDestino, string nroOrigen)
@@ -25,7 +27,7 @@ namespace ModelosCentralita
 
         // Metodo Mostrar
 
-        public string Mostrar()
+        public virtual string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -56,5 +58,29 @@ namespace ModelosCentralita
             }
             return retorno;
         }
+
+        // Sobrecarga de operadores == y !=
+
+        public static bool operator ==(Llamada ll1, Llamada ll2)
+        {
+            bool bandera = false;
+
+            if (ll1 is not null && ll2 is not null)
+            {
+                bandera = ll1.Equals(ll2) && ll1.NroOrigen == ll2.NroOrigen && ll1.NroDestino == ll2.NroDestino;
+            }
+            else if(ll1 is null && ll2 is null)
+            {
+                bandera = true;
+            }
+            return bandera;
+        }
+
+        public static bool operator !=(Llamada ll1, Llamada ll2)
+        {
+            return !(ll1 == ll2);
+        }
+
+        
     }
 }

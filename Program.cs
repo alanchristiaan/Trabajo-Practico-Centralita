@@ -25,28 +25,68 @@ namespace MainCentralita
             Provincial p2 = new Provincial(FranjaHoraria.franja_3, l1);
 
             // 3. Agregar las llamadas a la lista de la centralita
-            Console.WriteLine("3. Agregando las llamadas a la centralita...");
-            c.ListaDeLlamadas.Add(l1);
-            c.ListaDeLlamadas.Add(l2);
-            c.ListaDeLlamadas.Add(p1);
-            c.ListaDeLlamadas.Add(p2);
+            //Console.WriteLine("3. Agregando las llamadas a la centralita...");
+            //c.ListaDeLlamadas.Add(l1);
+            //c.ListaDeLlamadas.Add(l2);
+            //c.ListaDeLlamadas.Add(p1);
+            //c.ListaDeLlamadas.Add(p2);
 
-            // 4. Mostrar la centralita antes y después de ordenar las llamadas.
-            Console.WriteLine("\n4. Mostrando la centralita ANTES de ordenar:");
+
+            // Agrego las llamadas a la lista que estan comentadas en el punto 3 con el operador +
+
+            c += l1;
+            c += l2;
+            c += p1;
+            c += p2;
+
+            // Intento añadir una llamada repetida
+
+            c += l2;
+
+            // Comparo una llamada para verificar si el objeto llamada esta dentro de centralita
+            Console.WriteLine("Comparo un objeto del tipo llamada con el objeto Centralita");
+            if (c == l1)
+            {
+                Console.WriteLine("La llamada esta dentro de la lista");
+            }
+
+            // 4.a. Mostrar la primer centralita.
+            Console.WriteLine("\n4. Mostrando la centralita sin ordenar con 4 llamadas");
             Console.WriteLine("========================================");
-            Console.WriteLine(c.Mostrar());
+            Console.WriteLine(c.ToString());
+
+            // Defino una nueva llamada
+            Local l3 = new Local(50.0f, "999999", "888888", 3.0f);
+
+            // Ahora comparo la nueva llamada con la lista de Centralita
+
+            Console.WriteLine("Comparo la nueva llamada con la Centralita (si no esta, la agregamos)");
+
+            if(c != l3)
+            {
+                Console.WriteLine("La nueva llamada no esta dentro de Centralita");
+                c += l3;
+            }
+
+            // 4.b. Mostrar la centralita final antes y después de ordenar las llamadas.
+            Console.WriteLine("\n4. Mostrando la centralita final ANTES de ordenar:");
+            Console.WriteLine("========================================");
+            Console.WriteLine(c.ToString());
 
             Console.WriteLine("Ordenando las llamadas por duración...");
             c.OrdenarLlamadas();
 
             Console.WriteLine("\nMostrando la centralita DESPUÉS de ordenar:");
             Console.WriteLine("========================================");
-            Console.WriteLine(c.Mostrar());
+            Console.WriteLine(c.ToString());
 
             // 5. Verificar manualmente costos y ganancias.
             Console.WriteLine("5. Verificación de costos y ganancias finalizada.");
             Console.WriteLine("\nFin de la prueba. Presioná una tecla para salir.");
             Console.ReadKey();
+
+
+
         }
     }
 }
